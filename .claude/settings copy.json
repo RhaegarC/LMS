@@ -1,0 +1,29 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dotnet:*)",
+      "Bash(git:*)",
+      "Bash(gh:*)",
+      "Bash(git commit -m ' *)",
+      "Bash(gh repo *)",
+      "Bash(git ls-remote *)",
+      "Bash(cp .claude/settings.json /tmp/settings.want.json && git checkout -f develop 2>&1 && echo \"---PULL---\" && git pull --rebase origin develop 2>&1 | tail -5)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if ls src/*.sln* >/dev/null 2>&1; then if (cd src && dotnet test --nologo -v quiet); then echo 'TDD guard: all tests green'; else echo 'TDD guard: tests FAILING - commit blocked (fix or /add-test)' >&2; exit 2; fi; else echo 'TDD guard: no solution in src/ yet - skipping'; fi",
+            "if": "Bash(git commit:*)",
+            "timeout": 180,
+            "statusMessage": "Running dotnet test before commit (TDD guard)"
+          }
+        ]
+      }
+    ]
+  }
+}
