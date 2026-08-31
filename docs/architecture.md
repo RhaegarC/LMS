@@ -34,7 +34,7 @@ The [§7 permission matrix](docs/PRD.md) is enforced server-side against the DB 
 
 | Piece | Where |
 | :--- | :--- |
-| Angular SPA | **Azure Static Web Apps** (CDN, SSL, CI/CD) |
+| React SPA | **Azure Static Web Apps** (CDN, SSL, CI/CD) |
 | .NET 10 API | **Azure Container Apps** (single container) |
 | Database | **Azure SQL (serverless)** — relational, ACID |
 | Media | **Azure Blob Storage (Hot)** — read/written **through the API** (no SAS URLs) |
@@ -50,7 +50,7 @@ lms/
 │   ├── Lms.Domain/     # entities + business logic (no EF/UI deps)
 │   ├── Lms.Data/       # EF Core DbContext, migrations, seeds
 │   └── Lms.Tests/      # xUnit (unit + EF InMemory integration)
-├── web/                # single Angular app (lazy routes per role, guards, services + signals)
+├── web/                # React SPA (UI exported from Figma Make)
 └── docs/
 ```
 
@@ -114,11 +114,12 @@ Limits: **500 MB max**, allowlist `JPG/PNG/MP4/MOV/WEBM/MP3/M4A`. No chunked-res
 
 ## 7. Frontend (web/)
 
-- **Single Angular app** — three lazy-loaded route modules (`/teacher`, `/student`, `/admin`)
-  guarded by route guards resolving the app role from the current user (DB-backed).
-- **No state library** — plain injectable services + signals.
+- **Single React app** — three lazy-loaded route sections (`/teacher`, `/student`, `/admin`)
+  using React Router, guarded by route guards resolving the app role from the current user (DB-backed).
+- **No global state library** — hooks + context.
+- **UI source:** the design is created in **Figma Make**; the exported UI source lives in `web/`.
 - Shared components: star picker, review player, confetti, media recorder, quick-comment picker.
-- Recording uses `MediaRecorder` → blob → normal `HttpClient` upload with progress events
+- Recording uses `MediaRecorder` → blob → normal `fetch`/`axios` upload with progress events
   (no Blob SDK in the browser).
 
 ## 8. Reporting & Cross-Cutting
@@ -143,6 +144,6 @@ Limits: **500 MB max**, allowlist `JPG/PNG/MP4/MOV/WEBM/MP3/M4A`. No chunked-res
 ## 10. Testing Strategy
 
 See [docs/testing-and-tdd.md](docs/testing-and-tdd.md). Backend: xUnit (unit + EF InMemory).
-Frontend: Vitest + Testing Library. TDD Red-Green-Refactor, full suite green before PR.
+Frontend: Vitest + React Testing Library. TDD Red-Green-Refactor, full suite green before PR.
 
 ---
