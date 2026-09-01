@@ -64,7 +64,7 @@ Single-page app → REST API (modular monolith) → Azure SQL + Blob Storage.
 
 | Component | Technology |
 | :--- | :--- |
-| **Frontend** | Angular SPA (hosted on Azure Static Web Apps) |
+| **Frontend** | React SPA (hosted on Azure Static Web Apps) |
 | **API** | .NET 10 on Azure Container Apps |
 | **Database** | Azure SQL (serverless) |
 | **Media** | Azure Blob Storage — read/written through the API |
@@ -78,7 +78,7 @@ See [docs/architecture.md](docs/architecture.md) for the full system architectur
 
 | Layer | Technology | Purpose |
 | :--- | :--- | :--- |
-| **Frontend** | Angular | Student & teacher dashboard |
+| **Frontend** | React | Student & teacher dashboard |
 | **Hosting** | Azure Static Web Apps | Global CDN, free SSL, CI/CD |
 | **API** | Azure Container APP | HTTP endpoints, business logic |
 | **Database** | Azure SQL (Serverless) | Relational data, ACID transactions |
@@ -98,7 +98,7 @@ lms/
 │   ├── Lms.Domain/      # entities + business logic (no EF/UI deps)
 │   ├── Lms.Data/        # EF Core DbContext, migrations, seeds
 │   └── Lms.Tests/       # xUnit tests (unit + integration)
-├── web/                 # Angular SPA
+├── web/                 # React app (UI exported from Figma Make)
 ├── docs/
 │   ├── PRD.md           # Product requirements
 │   ├── architecture.md  # System architecture
