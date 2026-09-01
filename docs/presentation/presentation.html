@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LMS — For Teachers</title>
+<meta name="description" content="LMS is your English-teaching companion. Manage the whole homework journey in one place: assign, students respond, you give feedback, you see the results.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#232743;
+    --ink-soft:#4a5066;
+    --muted:#6f768b;
+    --paper:#f7f3fb;
+    --card:#ffffff;
+    --line:#ece5f5;
+    --violet:#6c5ce7;
+    --violet-dark:#5643d9;
+    --violet-soft:#eee9fc;
+    --coral:#ff7a59;
+    --teal:#1fb8a5;
+    --gold:#f5a800;
+    --radius:18px;
+    --shadow:0 10px 30px rgba(80,70,150,.10);
+    --shadow-lg:0 24px 55px rgba(80,70,150,.18);
+  }
+
+  *{ box-sizing:border-box; margin:0; padding:0; }
+
+  html{ scroll-behavior:smooth; scroll-padding-top:92px; }
+
+  body{
+    font-family:"Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    color:var(--ink);
+    background:
+      radial-gradient(900px 500px at 100% 0%, rgba(255,122,89,.10), transparent 60%),
+      radial-gradient(900px 500px at 0% 15%, rgba(108,92,231,.10), transparent 60%),
+      var(--paper);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  h1,h2,h3{ line-height:1.15; font-weight:800; letter-spacing:-.02em; }
+  a{ color:var(--violet); text-decoration:none; }
+
+  .wrap{ max-width:1080px; margin:0 auto; padding:0 24px; }
+
+  /* ---------- Nav ---------- */
+  nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(255,255,255,.82);
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{ display:flex; align-items:center; justify-content:space-between; gap:16px; padding:14px 24px; max-width:1080px; margin:0 auto; }
+  .brand{ display:flex; align-items:center; gap:10px; font-weight:800; font-size:1.05rem; letter-spacing:-.01em; }
+  .brand-dot{ width:30px; height:30px; border-radius:9px; flex:none;
+    background:linear-gradient(135deg,var(--violet),var(--coral)); box-shadow:0 4px 10px rgba(108,92,231,.35); }
+  .nav-links{ display:flex; gap:4px; flex-wrap:wrap; justify-content:flex-end; }
+  .nav-links a{ color:var(--ink-soft); font-size:.85rem; font-weight:600; padding:7px 12px; border-radius:999px; transition:.2s; }
+  .nav-links a:hover{ color:var(--violet); background:var(--violet-soft); }
+
+  /* ---------- Hero ---------- */
+  header.hero{
+    position:relative; overflow:hidden;
+    background:linear-gradient(160deg,#5b48dd 0%, #7a5de8 48%, #a06fe6 100%);
+    color:#fff; text-align:center; padding:96px 24px 84px;
+  }
+  .hero::before,.hero::after{
+    content:""; position:absolute; border-radius:50%; filter:blur(2px); opacity:.35; pointer-events:none;
+  }
+  .hero::before{ width:420px; height:420px; top:-160px; left:-120px; background:radial-gradient(circle, #ffd08a, transparent 65%); }
+  .hero::after{ width:460px; height:460px; bottom:-200px; right:-140px; background:radial-gradient(circle, #8ff0e4, transparent 65%); }
+  .hero .wrap{ position:relative; z-index:1; }
+  .hero-eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    background:rgba(255,255,255,.16); border:1px solid rgba(255,255,255,.28);
+    padding:8px 18px; border-radius:999px; font-size:.85rem; font-weight:600; letter-spacing:.04em;
+    text-transform:uppercase; margin-bottom:24px;
+  }
+  .hero h1{ font-size:clamp(2.2rem, 6vw, 3.6rem); max-width:720px; margin:0 auto 18px; }
+  .hero p.lede{ font-size:clamp(1.05rem, 2.4vw, 1.3rem); max-width:640px; margin:0 auto 36px; opacity:.95; font-weight:500; }
+  .flow{ display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:10px; margin-bottom:42px; }
+  .flow-step{
+    background:rgba(255,255,255,.15); border:1px solid rgba(255,255,255,.3);
+    padding:10px 18px; border-radius:999px; font-weight:700; font-size:.95rem;
+    display:inline-flex; align-items:center; gap:8px; box-shadow:0 6px 18px rgba(0,0,0,.10);
+  }
+  .flow-arrow{ font-weight:800; font-size:1.2rem; opacity:.9; }
+  .hero-cta{ display:flex; gap:14px; justify-content:center; flex-wrap:wrap; }
+  .btn{ display:inline-flex; align-items:center; gap:8px; padding:14px 26px; border-radius:999px; font-weight:700; font-size:1rem; transition:transform .18s, box-shadow .18s; }
+  .btn:hover{ transform:translateY(-2px); }
+  .btn-solid{ background:#fff; color:var(--violet-dark); box-shadow:0 10px 26px rgba(30,20,80,.30); }
+  .btn-solid:hover{ box-shadow:0 16px 34px rgba(30,20,80,.36); }
+  .btn-ghost{ background:rgba(255,255,255,.12); color:#fff; border:1px solid rgba(255,255,255,.4); }
+
+  /* ---------- Sections ---------- */
+  section{ padding:72px 0; }
+  section + section{ border-top:1px solid var(--line); }
+
+  .sec-head{ max-width:720px; margin-bottom:40px; }
+  .sec-head.center{ margin-left:auto; margin-right:auto; text-align:center; }
+  .eyebrow{ display:inline-block; font-size:.78rem; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--violet); margin-bottom:12px; }
+  .sec-head h2{ font-size:clamp(1.6rem, 3.6vw, 2.2rem); margin-bottom:12px; }
+  .sec-head p{ color:var(--muted); font-size:1.05rem; }
+
+  /* Cards & grids */
+  .grid{ display:grid; gap:20px; }
+  .g-2{ grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); }
+  .g-3{ grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); }
+  .g-5{ grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); }
+
+  .card{ background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:26px; box-shadow:var(--shadow); }
+  .card .icon{ font-size:2rem; line-height:1; margin-bottom:12px; display:block; }
+  .card h3{ font-size:1.12rem; margin-bottom:8px; }
+  .card p, .card li{ color:var(--ink-soft); font-size:.96rem; }
+  .card ul{ padding-left:18px; display:grid; gap:6px; }
+
+  /* Numbered steps */
+  .step{ position:relative; }
+  .step-num{
+    width:40px; height:40px; border-radius:12px; display:grid; place-items:center;
+    font-weight:800; font-size:1.1rem; color:#fff; margin-bottom:14px;
+    background:linear-gradient(135deg,var(--violet),var(--coral)); box-shadow:0 8px 18px rgba(108,92,231,.3);
+  }
+  .step:nth-child(even) .step-num{ background:linear-gradient(135deg,var(--teal),#3ec7b4); box-shadow:0 8px 18px rgba(31,184,165,.3); }
+  .step:nth-child(3n) .step-num{ background:linear-gradient(135deg,var(--coral),#ff9c78); box-shadow:0 8px 18px rgba(255,122,89,.3); }
+
+  /* Tables */
+  .table-card{ overflow:hidden; padding:0; }
+  table{ width:100%; border-collapse:collapse; font-size:.96rem; }
+  thead th{ text-align:left; background:var(--violet-soft); color:var(--violet-dark); font-weight:700; font-size:.82rem; letter-spacing:.05em; text-transform:uppercase; padding:14px 22px; }
+  tbody td{ padding:16px 22px; border-top:1px solid var(--line); color:var(--ink-soft); vertical-align:top; }
+  tbody td:first-child{ font-weight:700; color:var(--ink); }
+  tbody tr:hover{ background:#faf8ff; }
+
+  .note{ display:flex; gap:10px; align-items:flex-start; background:#fff8e6; border:1px solid #f3e3ad; color:#7a5a12; padding:14px 18px; border-radius:14px; font-size:.92rem; margin-top:18px; }
+  .note strong{ color:#5d4308; }
+
+  /* Checklist */
+  .checklist{ list-style:none; display:grid; gap:14px; }
+  .checklist li{ display:flex; gap:12px; align-items:flex-start; background:var(--card); border:1px solid var(--line); border-radius:14px; padding:16px 18px; box-shadow:var(--shadow); }
+  .checklist .bullet{ flex:none; width:26px; height:26px; border-radius:50%; display:grid; place-items:center; font-size:.8rem; color:#fff; background:linear-gradient(135deg,var(--violet),var(--teal)); margin-top:2px; }
+  .checklist .sub{ display:block; color:var(--muted); font-size:.88rem; margin-top:4px; }
+
+  /* Grading toolkit */
+  .toolkit .icon{ font-size:2.4rem; }
+  .toolkit h3 span{ display:block; font-size:.9rem; font-weight:600; color:var(--violet); margin-top:2px; }
+
+  /* Quick comments chips */
+  .chips{ display:flex; flex-wrap:wrap; gap:12px; margin-top:8px; }
+  .chip{ background:var(--violet-soft); color:var(--violet-dark); border:1px solid #ddd6f8; padding:10px 18px; border-radius:999px; font-weight:600; font-size:.9rem; }
+
+  /* Draft -> Publish flow */
+  .pubflow{ display:grid; grid-template-columns:1fr auto 1fr; gap:16px; align-items:stretch; }
+  .pubflow .arrow{ display:grid; place-items:center; font-size:1.6rem; color:var(--violet); font-weight:800; }
+  .pubcard{ border-radius:var(--radius); padding:22px; border:1px solid var(--line); background:var(--card); box-shadow:var(--shadow); }
+  .pubcard .tag{ display:inline-block; font-size:.75rem; font-weight:800; letter-spacing:.08em; text-transform:uppercase; padding:5px 12px; border-radius:999px; margin-bottom:10px; }
+  .tag-draft{ background:#eceff5; color:#5a6270; }
+  .tag-pub{ background:linear-gradient(135deg,var(--teal),#3ec7b4); color:#fff; }
+  .pubcard h3{ margin-bottom:8px; }
+  .pubcard p{ color:var(--ink-soft); font-size:.94rem; }
+
+  /* Stats band */
+  .stats{ display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:16px; }
+  .stat{ text-align:center; background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:24px 16px; box-shadow:var(--shadow); }
+  .stat .emoji{ font-size:2rem; }
+  .stat .num{ display:block; font-size:1.5rem; font-weight:800; color:var(--violet-dark); margin-top:6px; }
+  .stat .lbl{ font-size:.85rem; color:var(--muted); font-weight:600; }
+
+  .trends{ display:flex; gap:10px; flex-wrap:wrap; }
+  .trend{ background:var(--violet-soft); border:1px solid #ddd6f8; border-radius:999px; padding:8px 16px; font-weight:700; font-size:.9rem; color:var(--violet-dark); }
+
+  /* Footer */
+  footer{ margin-top:72px; background:linear-gradient(160deg,#332a6e,#4a38b8 60%,#5b48dd); color:#fff; padding:56px 24px; text-align:center; }
+  footer h2{ font-size:clamp(1.5rem,3.4vw,2.1rem); margin-bottom:12px; }
+  footer p{ opacity:.9; max-width:560px; margin:0 auto 26px; }
+  footer .btn{ background:#fff; color:var(--violet-dark); }
+  footer .tiny{ margin-top:30px; font-size:.82rem; opacity:.6; }
+
+  /* Reveal animation */
+  .reveal{ opacity:0; transform:translateY(20px); transition:opacity .7s ease, transform .7s ease; }
+  .reveal.in{ opacity:1; transform:none; }
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    .reveal{ opacity:1; transform:none; transition:none; }
+    .btn:hover{ transform:none; }
+  }
+
+  /* Responsive */
+  @media (max-width:760px){
+    header.hero{ padding:64px 24px 60px; }
+    section{ padding:56px 0; }
+    .nav-links{ display:none; }
+    .pubflow{ grid-template-columns:1fr; }
+    .pubflow .arrow{ transform:rotate(90deg); padding:6px 0; }
+  }
+
+  @media print{
+    nav, footer .btn{ display:none; }
+    body{ background:#fff; }
+    section{ border:none; }
+    .reveal{ opacity:1; transform:none; }
+    .card, .table-card, .checklist li, .stat, .pubcard{ box-shadow:none; break-inside:avoid; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="brand"><span class="brand-dot"></span> LMS</div>
+    <div class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#classes">Classes</a>
+      <a href="#assignments">Assignments</a>
+      <a href="#submissions">Submissions</a>
+      <a href="#grading">Grading</a>
+      <a href="#reports">Reports</a>
+      <a href="#quickstart">Quick start</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="hero-eyebrow">👋 Welcome — LMS for Teachers</span>
+    <h1>Teaching English, minus the paperwork</h1>
+    <p class="lede">LMS is your English-teaching companion. It manages the whole homework journey in one place — no more paper, no more files scattered in chat, no more guessing who handed things in on time.</p>
+
+    <div class="flow">
+      <span class="flow-step">📝 You assign</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-step">📤 Students respond</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-step">⭐ You give feedback</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-step">📊 You see the results</span>
+    </div>
+
+    <div class="hero-cta">
+      <a class="btn btn-solid" href="https://engcraft.nioh.uk" target="_blank" rel="noopener">Try the live demo →</a>
+      <a class="btn btn-ghost" href="#how">See how it works</a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- How it works -->
+  <section id="how">
+    <div class="wrap">
+      <div class="sec-head center reveal">
+        <span class="eyebrow">The journey</span>
+        <h2>How it works</h2>
+        <p>Five simple steps carry you from first class to published feedback.</p>
+      </div>
+      <div class="grid g-5">
+        <div class="card step reveal">
+          <div class="step-num">1</div>
+          <span class="icon">👥</span>
+          <h3>Create a class</h3>
+          <p>Set it up and add your students.</p>
+        </div>
+        <div class="card step reveal">
+          <div class="step-num">2</div>
+          <span class="icon">📝</span>
+          <h3>Create an assignment</h3>
+          <p>With text, video, or voice instructions.</p>
+        </div>
+        <div class="card step reveal">
+          <div class="step-num">3</div>
+          <span class="icon">📤</span>
+          <h3>Students submit</h3>
+          <p>Their own text, video, or voice responses.</p>
+        </div>
+        <div class="card step reveal">
+          <div class="step-num">4</div>
+          <span class="icon">✍️</span>
+          <h3>Review &amp; grade</h3>
+          <p>Stars, comments, even your own voice message.</p>
+        </div>
+        <div class="card step reveal">
+          <div class="step-num">5</div>
+          <span class="icon">⭐</span>
+          <h3>Publish feedback</h3>
+          <p>Your students see it instantly.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Classes -->
+  <section id="classes">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow">Manage your roster</span>
+        <h2>Classes</h2>
+        <p>Build classes, keep rosters fresh, and always know who's in your classroom.</p>
+      </div>
+      <div class="card table-card reveal">
+        <table>
+          <thead><tr><th>What you can do</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td>Create a class</td><td>Give it a name and a short description</td></tr>
+            <tr><td>Edit a class</td><td>Change name / description anytime — students &amp; assignments are untouched</td></tr>
+            <tr><td>Add students</td><td>Search by name or email, add one or many</td></tr>
+            <tr><td>Remove students</td><td>The student loses access right away — but their past submissions are kept for your records</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="note reveal">💡 <div><strong>One student, many classes.</strong> Students can be in several of your classes at once. Duplicate enrollments are simply ignored.</div></div>
+    </div>
+  </section>
+
+  <!-- Assignments -->
+  <section id="assignments">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow">What you can assign</span>
+        <h2>Assignments</h2>
+        <p>Build each assignment from three kinds of instruction items.</p>
+      </div>
+      <div class="grid g-3">
+        <div class="card reveal">
+          <span class="icon">📝</span>
+          <h3>Text</h3>
+          <p>Rich text — bold, lists, full instructions.</p>
+        </div>
+        <div class="card reveal">
+          <span class="icon">🎬</span>
+          <h3>Video</h3>
+          <p>A reference video for students to watch and mimic.</p>
+        </div>
+        <div class="card reveal">
+          <span class="icon">🎤</span>
+          <h3>Voice</h3>
+          <p>A short audio instruction you record.</p>
+        </div>
+      </div>
+
+      <div class="grid g-2" style="margin-top:20px;">
+        <div class="card reveal">
+          <h3>Key features</h3>
+          <ul>
+            <li><strong>Due date</strong> for each assignment (11:59 PM your time).</li>
+            <li><strong>Draft mode</strong> — save quietly, work on it later. Nothing is visible to students until you <strong>publish</strong>.</li>
+            <li><strong>Clone</strong> — duplicate a past assignment and reuse it with just a few tweaks.</li>
+            <li><strong>Edit after publishing</strong> — tweak anything; students see the new version next time they look.</li>
+            <li>Assign to <strong>one class or several</strong>.</li>
+          </ul>
+        </div>
+        <div class="card reveal" style="display:flex; flex-direction:column; justify-content:center; text-align:center; background:linear-gradient(150deg,var(--violet-soft),#fff);">
+          <span class="icon" style="font-size:3rem;">🎯</span>
+          <h3>Built for variety</h3>
+          <p>Mix text, video, and voice in a single assignment — so every task fits the lesson.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Submissions -->
+  <section id="submissions">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow">From students</span>
+        <h2>Student submissions</h2>
+        <p>Clear expectations, gentle deadlines, and no surprises for you.</p>
+      </div>
+      <ul class="checklist">
+        <li class="reveal">
+          <span class="bullet">✓</span>
+          <div><strong>Every item answered</strong> — students respond to text, video, and voice items alike.</div>
+        </li>
+        <li class="reveal">
+          <span class="bullet">✓</span>
+          <div><strong>Late work is accepted</strong> and clearly marked with a ⏰ <strong>Late</strong> badge — no penalty, just a heads-up for you.</div>
+        </li>
+        <li class="reveal">
+          <span class="bullet">✓</span>
+          <div><strong>Students can edit their submission</strong> until you've published feedback.
+            <span class="sub">If a student resubmits after you started grading, your draft feedback is cleared and you're notified to grade again. No surprises.</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Grading -->
+  <section id="grading">
+    <div class="wrap">
+      <div class="sec-head center reveal">
+        <span class="eyebrow">Your feedback toolkit</span>
+        <h2>Reviewing &amp; grading ✍️</h2>
+        <p>Grade quickly and kindly — right in the page.</p>
+      </div>
+
+      <div class="grid g-2" style="margin-bottom:20px;">
+        <div class="card reveal">
+          <span class="icon">🗂️</span>
+          <h3>The pending queue</h3>
+          <p>Every submission awaiting your feedback, <strong>oldest first</strong>. You only see your own classes.</p>
+        </div>
+        <div class="card reveal">
+          <span class="icon">▶️</span>
+          <h3>The review player</h3>
+          <p>Watch videos and listen to voice responses right in the page — with <strong>playback speed (0.5× → 2×)</strong> so long recordings don't eat your time.</p>
+        </div>
+      </div>
+
+      <div class="grid g-3 toolkit">
+        <div class="card reveal">
+          <span class="icon">⭐</span>
+          <h3>Star rating <span>per item</span></h3>
+          <p>Rate each item 0.5 to 5.0 stars, half-stars allowed.</p>
+        </div>
+        <div class="card reveal">
+          <span class="icon">💬</span>
+          <h3>Text feedback <span>rich + quick</span></h3>
+          <p>Rich text, plus <strong>quick comments</strong> — one tap, emoji included.</p>
+        </div>
+        <div class="card reveal">
+          <span class="icon">🎙️</span>
+          <h3>Voice feedback <span>personal touch</span></h3>
+          <p>Record a personal message (up to 1 minute).</p>
+        </div>
+      </div>
+
+      <div class="card reveal" style="margin-top:20px;">
+        <h3>Quick comments — tap to insert, then edit freely</h3>
+        <div class="chips">
+          <span class="chip">Great job! 🌟</span>
+          <span class="chip">Wonderful effort! ⭐</span>
+          <span class="chip">Keep practicing! 💪</span>
+          <span class="chip">Fantastic progress! 🚀</span>
+          <span class="chip">Excellent pronunciation! 🎯</span>
+          <span class="chip">I'm so proud of you! ❤️</span>
+          <span class="chip">Try again, you can do it! 😊</span>
+        </div>
+      </div>
+
+      <div class="pubflow" style="margin-top:20px;">
+        <div class="pubcard reveal">
+          <span class="tag tag-draft">Draft</span>
+          <h3>Invisible to students</h3>
+          <p>Save feedback as a draft and finish later. Students can't see it yet.</p>
+        </div>
+        <div class="arrow reveal">→</div>
+        <div class="pubcard reveal">
+          <span class="tag tag-pub">Publish</span>
+          <h3>Final &amp; visible</h3>
+          <p>When you publish, it's <strong>final</strong> — the student sees their stars, your comments, and your voice message right away.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reports -->
+  <section id="reports">
+    <div class="wrap">
+      <div class="sec-head center reveal">
+        <span class="eyebrow">See the results</span>
+        <h2>Reports &amp; statistics 📊</h2>
+        <p>Turn submissions into insight — for one assignment, one student, or the whole class.</p>
+      </div>
+
+      <div class="grid g-3">
+        <div class="card reveal">
+          <span class="icon">📈</span>
+          <h3>Assignment statistics</h3>
+          <p>For any assignment, see at a glance:</p>
+          <ul style="padding-left:18px; display:grid; gap:6px; color:var(--ink-soft); font-size:.95rem;">
+            <li><strong>Total submissions</strong> — who handed in, who didn't</li>
+            <li><strong>On-time vs Late vs Not-submitted</strong> (counts + percentages)</li>
+            <li><strong>Per-item average stars</strong> — spot which item students found hardest</li>
+          </ul>
+        </div>
+        <div class="card reveal">
+          <span class="icon">🧒</span>
+          <h3>Student progress card</h3>
+          <p>A complete view of <strong>one student</strong> across assignments:</p>
+          <ul style="padding-left:18px; display:grid; gap:6px; color:var(--ink-soft); font-size:.95rem;">
+            <li>Every assignment + submission date (Late badge included)</li>
+            <li>Per-item star ratings &amp; feedback summary</li>
+            <li>A <strong>trend</strong> — improving, steady, or declining</li>
+            <li>Filter by <strong>time range</strong> and by class</li>
+            <li><strong>Export as PDF</strong> — perfect for parent–teacher meetings</li>
+          </ul>
+        </div>
+        <div class="card reveal">
+          <span class="icon">🏫</span>
+          <h3>Class engagement snapshot</h3>
+          <p>A class-level overview for a specific assignment:</p>
+          <ul style="padding-left:18px; display:grid; gap:6px; color:var(--ink-soft); font-size:.95rem;">
+            <li>✅ On-time / ⏰ Late / ❌ Not-submitted breakdown</li>
+            <li><strong>Per-item star distribution</strong> — e.g. 5⭐ (6), 4⭐ (8), 3⭐ (2)</li>
+            <li>Visual <strong>bar chart</strong> of the submission breakdown</li>
+            <li><strong>Export as PDF or CSV</strong></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="stats" style="margin-top:20px;">
+        <div class="stat reveal"><span class="emoji">📥</span><span class="num">Total</span><span class="lbl">submissions vs missing</span></div>
+        <div class="stat reveal"><span class="emoji">⏰</span><span class="num">Late</span><span class="lbl">counts + percentages</span></div>
+        <div class="stat reveal"><span class="emoji">⭐</span><span class="num">Avg / item</span><span class="lbl">spot the hard items</span></div>
+        <div class="stat reveal"><span class="emoji">📄</span><span class="num">PDF · CSV</span><span class="lbl">export anytime</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What students see -->
+  <section id="students">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow">From the other side</span>
+        <h2>What students see</h2>
+        <p>Child-friendly, encouraging, and simple — the whole journey from their screen.</p>
+      </div>
+      <div class="grid g-2">
+        <div class="card reveal">
+          <span class="icon">📋</span>
+          <h3>Their assignments</h3>
+          <p>Clear instructions, exactly what they need to respond — text, video, or voice.</p>
+        </div>
+        <div class="card reveal">
+          <span class="icon">🎉</span>
+          <h3>A celebration</h3>
+          <p><strong>Confetti 🎉</strong> the moment a submission goes through successfully.</p>
+        </div>
+        <div class="card reveal">
+          <span class="icon">💖</span>
+          <h3>Their feedback</h3>
+          <p>Once you publish: star ratings, comments, and your voice message.</p>
+        </div>
+        <div class="card reveal">
+          <span class="icon">🧭</span>
+          <h3>Their progress card</h3>
+          <p>A personal progress card, tracking how they're doing over time.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick start -->
+  <section id="quickstart">
+    <div class="wrap">
+      <div class="sec-head center reveal">
+        <span class="eyebrow">Ready when you are</span>
+        <h2>Quick start for you</h2>
+        <p>From zero to your first graded assignment in six steps.</p>
+      </div>
+      <ol class="checklist" style="list-style:none;">
+        <li class="reveal"><span class="bullet">1</span><div>Create your class → add students</div></li>
+        <li class="reveal"><span class="bullet">2</span><div>Write your first assignment (drafts are your friend) → publish</div></li>
+        <li class="reveal"><span class="bullet">3</span><div>Wait for submissions → review from the pending queue</div></li>
+        <li class="reveal"><span class="bullet">4</span><div>Grade with stars + comments + voice → publish feedback</div></li>
+        <li class="reveal"><span class="bullet">5</span><div>Open the reports to see how your class is doing</div></li>
+      </ol>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <h2>Welcome aboard! 🚀</h2>
+    <p>Simple, encouraging, and built around your workflow.</p>
+    <a class="btn" href="https://engcraft.nioh.uk" target="_blank" rel="noopener">Try the live demo →</a>
+    <div class="tiny">LMS — the English-teaching companion · <a href="https://engcraft.nioh.uk" style="color:#ffd9c8;">engcraft.nioh.uk</a></div>
+  </div>
+</footer>
+
+<script>
+  // Subtle reveal-on-scroll
+  const io = new IntersectionObserver((entries) => {
+    for (const e of entries) {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    }
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+</script>
+
+</body>
+</html>
