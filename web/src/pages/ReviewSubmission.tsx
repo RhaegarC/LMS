@@ -83,20 +83,20 @@ export default function ReviewSubmission({ onNavigate }: Props) {
   }
 
   return (
-    <div className="p-8 max-w-4xl mx-auto">
+    <div className="p-4 sm:p-8 max-w-4xl mx-auto">
       {/* Header */}
-      <div className="flex items-center gap-3 mb-6">
+      <div className="flex flex-wrap items-center gap-3 mb-6">
         <button onClick={() => onNavigate("pending-queue")} className="text-gray-400 hover:text-[#1A1033] transition-colors">
           ← Back
         </button>
-        <div className="flex-1">
-          <h1 className="text-2xl font-black text-[#1A1033]" style={{ fontFamily: "Nunito, sans-serif" }}>Review Submission</h1>
+        <div className="flex-1 min-w-0">
+          <h1 className="text-xl sm:text-2xl font-black text-[#1A1033]" style={{ fontFamily: "Nunito, sans-serif" }}>Review Submission</h1>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 flex-wrap">
           <div className="w-8 h-8 rounded-xl bg-teal-200 text-teal-700 flex items-center justify-center text-sm font-black">EC</div>
           <div>
             <div className="text-sm font-bold text-[#1A1033]">Emma Chen</div>
-            <div className="text-xs text-gray-400">Level 1 – Blue · Aug 30, 9:14 AM</div>
+            <div className="text-xs text-gray-400 hidden sm:block">Level 1 – Blue · Aug 30, 9:14 AM</div>
           </div>
           <span className="text-xs font-bold bg-green-100 text-green-700 px-2 py-0.5 rounded-full">✅ On time</span>
         </div>

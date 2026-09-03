@@ -41,7 +41,7 @@ export default function StudentDashboard({ onNavigate }: Props) {
   const completed = assignments.filter((a) => ["submitted", "feedback-ready"].includes(a.status));
 
   return (
-    <div className="p-8 max-w-4xl mx-auto">
+    <div className="p-4 sm:p-8 max-w-4xl mx-auto">
       {/* Header */}
       <div className="mb-8">
         <div className="text-sm font-semibold text-[#47D6B5] mb-1">Welcome back! 🌟</div>
@@ -58,20 +58,20 @@ export default function StudentDashboard({ onNavigate }: Props) {
         <div className="absolute right-16 bottom-2 w-10 h-10 bg-[#FFD147]/30 rotate-45" />
         <div className="absolute right-8 top-8 w-6 h-6 rounded-full border-2 border-white/20" />
 
-        <div className="relative z-10 flex items-center gap-6">
+        <div className="relative z-10 flex items-center gap-3 sm:gap-6">
           <div className="text-center">
-            <div className="text-4xl font-black" style={{ fontFamily: "Nunito, sans-serif" }}>5</div>
-            <div className="text-xs text-purple-200">assignments done</div>
+            <div className="text-3xl sm:text-4xl font-black" style={{ fontFamily: "Nunito, sans-serif" }}>5</div>
+            <div className="text-[10px] sm:text-xs text-purple-200">done</div>
           </div>
           <div className="text-center">
-            <div className="text-4xl font-black" style={{ fontFamily: "Nunito, sans-serif" }}>4.3⭐</div>
-            <div className="text-xs text-purple-200">avg rating</div>
+            <div className="text-3xl sm:text-4xl font-black" style={{ fontFamily: "Nunito, sans-serif" }}>4.3⭐</div>
+            <div className="text-[10px] sm:text-xs text-purple-200">avg rating</div>
           </div>
           <div className="text-center">
-            <div className="text-4xl font-black" style={{ fontFamily: "Nunito, sans-serif" }}>92%</div>
-            <div className="text-xs text-purple-200">on time</div>
+            <div className="text-3xl sm:text-4xl font-black" style={{ fontFamily: "Nunito, sans-serif" }}>92%</div>
+            <div className="text-[10px] sm:text-xs text-purple-200">on time</div>
           </div>
-          <div className="ml-auto">
+          <div className="ml-auto hidden xs:block">
             <div className="text-5xl">🏆</div>
           </div>
         </div>

@@ -19,7 +19,7 @@ function QueueRow({ name, assignment, submitted, isLate, onReview }: {
   name: string; assignment: string; submitted: string; isLate: boolean; onReview: () => void;
 }) {
   return (
-    <div className="flex items-center gap-4 px-5 py-3.5 hover:bg-purple-50/60 transition-colors group">
+    <div className="flex items-center gap-3 px-4 sm:px-5 py-3 sm:py-3.5 hover:bg-purple-50/60 transition-colors group">
       <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-purple-200 to-violet-300 flex items-center justify-center text-sm font-black text-purple-700 flex-none">
         {name.split(" ").map(n => n[0]).join("")}
       </div>
@@ -27,17 +27,17 @@ function QueueRow({ name, assignment, submitted, isLate, onReview }: {
         <div className="font-semibold text-sm text-[#1A1033] truncate">{name}</div>
         <div className="text-xs text-gray-500 truncate">{assignment}</div>
       </div>
-      <div className="flex items-center gap-2 flex-none">
+      <div className="flex items-center gap-1.5 flex-none">
         {isLate && (
-          <span className="text-xs font-bold bg-orange-100 text-orange-600 px-2 py-0.5 rounded-full flex items-center gap-1">
+          <span className="text-xs font-bold bg-orange-100 text-orange-600 px-1.5 py-0.5 rounded-full hidden sm:flex items-center gap-1">
             ⏰ Late
           </span>
         )}
-        <span className="text-xs text-gray-400">{submitted}</span>
+        <span className="text-xs text-gray-400 hidden sm:inline">{submitted}</span>
       </div>
       <button
         onClick={onReview}
-        className="text-xs font-bold bg-[#6C47FF] text-white px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity hover:bg-[#5535e0]"
+        className="text-xs font-bold bg-[#6C47FF] text-white px-3 py-1.5 rounded-lg sm:opacity-0 sm:group-hover:opacity-100 transition-opacity hover:bg-[#5535e0]"
       >
         Review
       </button>
@@ -61,26 +61,26 @@ export default function TeacherDashboard({ onNavigate }: Props) {
   ];
 
   return (
-    <div className="p-8 max-w-6xl mx-auto">
+    <div className="p-4 sm:p-8 max-w-6xl mx-auto">
       {/* Header */}
-      <div className="flex items-start justify-between mb-8">
+      <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3 mb-6">
         <div>
           <div className="text-sm font-semibold text-[#6C47FF] mb-1">Good morning 👋</div>
-          <h1 className="text-3xl font-black text-[#1A1033]" style={{ fontFamily: "Nunito, sans-serif" }}>
+          <h1 className="text-2xl sm:text-3xl font-black text-[#1A1033]" style={{ fontFamily: "Nunito, sans-serif" }}>
             Ms. Johnson's Dashboard
           </h1>
           <p className="text-gray-500 mt-1 text-sm">Saturday, Aug 30, 2026 · 3 classes active</p>
         </div>
         <button
           onClick={() => onNavigate("create-assignment")}
-          className="flex items-center gap-2 bg-[#6C47FF] hover:bg-[#5535e0] text-white font-bold px-4 py-2.5 rounded-xl transition-colors shadow-lg shadow-purple-200"
+          className="flex items-center gap-2 bg-[#6C47FF] hover:bg-[#5535e0] text-white font-bold px-4 py-2.5 rounded-xl transition-colors shadow-lg shadow-purple-200 self-start sm:self-auto"
         >
           <span>+</span> New Assignment
         </button>
       </div>
 
       {/* Stats grid */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-6">
         <StatCard value="7" label="Pending Review" color="bg-[#FF6B47] text-white" icon="⏳" sub="Oldest: 2 days ago" />
         <StatCard value="3" label="Active Classes" color="bg-[#FFD147] text-[#1A1033]" icon="🏫" sub="42 students total" />
         <StatCard value="12" label="Assignments" color="bg-[#47D6B5] text-white" icon="📋" sub="2 drafts" />
