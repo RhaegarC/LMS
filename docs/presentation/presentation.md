@@ -131,9 +131,23 @@ A class-level overview for a specific assignment:
 
 ---
 
+## Works on every screen
+
+One responsive LMS — no installs, just a browser. The same screens adapt to whatever device you're on:
+
+| Device | Experience |
+| :--- | :--- |
+| **PC / laptop** | Fixed sidebar navigation, multi-column dashboards, full data tables |
+| **Tablet** | Layouts reflow to fewer columns, easy tap targets |
+| **Phone** | ☰ menu with a bottom tab bar; tables become stacked cards — built for one thumb |
+
+**Try it:** open https://engcraft.nioh.uk on your PC, tablet, and phone.
+
+---
+
 ## Quick start for you
 
-1. Visit https://engcraft.nioh.uk for a staic UI demo without data.
+1. Visit https://engcraft.nioh.uk for a static UI demo without data.
 2. Create your class → add students
 3. Write your first assignment (drafts are your friend) → publish
 4. Wait for submissions → review from the pending queue

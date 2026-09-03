@@ -36,7 +36,7 @@ export default function PendingQueue({ onNavigate }: Props) {
   );
 
   return (
-    <div className="p-8 max-w-5xl mx-auto">
+    <div className="p-4 sm:p-8 max-w-5xl mx-auto">
       {/* Header */}
       <div className="mb-8">
         <h1 className="text-3xl font-black text-[#1A1033]" style={{ fontFamily: "Nunito, sans-serif" }}>Pending Queue</h1>
@@ -76,9 +76,10 @@ export default function PendingQueue({ onNavigate }: Props) {
         </div>
       </div>
 
-      {/* Queue table */}
+      {/* Queue — card on mobile, table on sm+ */}
       <div className="bg-white rounded-2xl border border-[#E5E0F5] overflow-hidden">
-        <div className="grid grid-cols-[auto_1fr_1fr_auto_auto_auto] gap-x-4 px-5 py-3 border-b border-[#E5E0F5] text-xs font-black text-gray-400 uppercase tracking-wide">
+        {/* Desktop header row */}
+        <div className="hidden sm:grid grid-cols-[auto_1fr_1fr_auto_auto_auto] gap-x-4 px-5 py-3 border-b border-[#E5E0F5] text-xs font-black text-gray-400 uppercase tracking-wide">
           <div />
           <div>Student</div>
           <div>Assignment</div>
@@ -88,43 +89,55 @@ export default function PendingQueue({ onNavigate }: Props) {
         </div>
         <div className="divide-y divide-[#F0EBFF]">
           {filtered.map((s, i) => (
-            <div
-              key={s.id}
-              className="grid grid-cols-[auto_1fr_1fr_auto_auto_auto] gap-x-4 items-center px-5 py-3.5 hover:bg-purple-50/40 transition-colors group"
-            >
-              {/* Avatar */}
-              <div className={`w-9 h-9 rounded-xl flex items-center justify-center text-sm font-black ${avatarColors[i % avatarColors.length]}`}>
-                {initials(s.student)}
+            <div key={s.id}>
+              {/* Mobile card row */}
+              <div className="sm:hidden flex items-center gap-3 px-4 py-3 hover:bg-purple-50/40 transition-colors">
+                <div className={`w-9 h-9 rounded-xl flex items-center justify-center text-sm font-black flex-none ${avatarColors[i % avatarColors.length]}`}>
+                  {initials(s.student)}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="font-semibold text-sm text-[#1A1033]">{s.student}</div>
+                  <div className="text-xs text-gray-400 truncate">{s.assignment}</div>
+                  <div className="flex items-center gap-1.5 mt-0.5">
+                    {s.isLate
+                      ? <span className="text-[10px] font-bold bg-orange-100 text-orange-600 px-1.5 py-0.5 rounded-full">⏰ Late</span>
+                      : <span className="text-[10px] font-bold bg-green-100 text-green-700 px-1.5 py-0.5 rounded-full">✅ On time</span>
+                    }
+                    <span className="text-[10px] text-gray-400">{s.submitted.split("·")[0].trim()}</span>
+                  </div>
+                </div>
+                <button
+                  onClick={() => onNavigate("review-submission")}
+                  className="text-xs font-bold bg-[#6C47FF] text-white px-3 py-1.5 rounded-lg hover:bg-[#5535e0] transition-colors flex-none"
+                >
+                  Review →
+                </button>
               </div>
-
-              {/* Student */}
-              <div>
-                <div className="font-semibold text-sm text-[#1A1033]">{s.student}</div>
-                <div className="text-xs text-gray-400">{s.class}</div>
+              {/* Desktop table row */}
+              <div className="hidden sm:grid grid-cols-[auto_1fr_1fr_auto_auto_auto] gap-x-4 items-center px-5 py-3.5 hover:bg-purple-50/40 transition-colors group">
+                <div className={`w-9 h-9 rounded-xl flex items-center justify-center text-sm font-black ${avatarColors[i % avatarColors.length]}`}>
+                  {initials(s.student)}
+                </div>
+                <div>
+                  <div className="font-semibold text-sm text-[#1A1033]">{s.student}</div>
+                  <div className="text-xs text-gray-400">{s.class}</div>
+                </div>
+                <div className="text-sm text-gray-600 truncate">{s.assignment}</div>
+                <div className="text-xs text-gray-400 whitespace-nowrap">{s.submitted}</div>
+                <div>
+                  {s.isLate ? (
+                    <span className="text-xs font-bold bg-orange-100 text-orange-600 px-2 py-0.5 rounded-full">⏰ Late</span>
+                  ) : (
+                    <span className="text-xs font-bold bg-green-100 text-green-700 px-2 py-0.5 rounded-full">✅ On time</span>
+                  )}
+                </div>
+                <button
+                  onClick={() => onNavigate("review-submission")}
+                  className="text-xs font-bold bg-[#6C47FF] text-white px-3 py-1.5 rounded-lg hover:bg-[#5535e0] transition-colors opacity-80 group-hover:opacity-100"
+                >
+                  Review →
+                </button>
               </div>
-
-              {/* Assignment */}
-              <div className="text-sm text-gray-600 truncate">{s.assignment}</div>
-
-              {/* Submitted */}
-              <div className="text-xs text-gray-400 whitespace-nowrap">{s.submitted}</div>
-
-              {/* Late badge */}
-              <div>
-                {s.isLate ? (
-                  <span className="text-xs font-bold bg-orange-100 text-orange-600 px-2 py-0.5 rounded-full">⏰ Late</span>
-                ) : (
-                  <span className="text-xs font-bold bg-green-100 text-green-700 px-2 py-0.5 rounded-full">✅ On time</span>
-                )}
-              </div>
-
-              {/* Action */}
-              <button
-                onClick={() => onNavigate("review-submission")}
-                className="text-xs font-bold bg-[#6C47FF] text-white px-3 py-1.5 rounded-lg hover:bg-[#5535e0] transition-colors opacity-80 group-hover:opacity-100"
-              >
-                Review →
-              </button>
             </div>
           ))}
         </div>

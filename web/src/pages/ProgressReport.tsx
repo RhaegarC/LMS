@@ -29,14 +29,14 @@ export default function ProgressReport() {
   const onTimeCount = submissions.filter((s) => !s.isLate).length;
 
   return (
-    <div className="p-8 max-w-5xl mx-auto">
+    <div className="p-4 sm:p-8 max-w-5xl mx-auto">
       {/* Header */}
-      <div className="flex items-start justify-between mb-8">
+      <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3 mb-6">
         <div>
-          <h1 className="text-3xl font-black text-[#1A1033]" style={{ fontFamily: "Nunito, sans-serif" }}>Progress Report</h1>
+          <h1 className="text-2xl sm:text-3xl font-black text-[#1A1033]" style={{ fontFamily: "Nunito, sans-serif" }}>Progress Report</h1>
           <p className="text-gray-500 text-sm mt-1">Emma Chen · Level 1 – Blue</p>
         </div>
-        <button className="flex items-center gap-2 border border-[#E5E0F5] bg-white text-sm font-bold text-gray-600 px-4 py-2 rounded-xl hover:bg-gray-50 transition-colors">
+        <button className="flex items-center gap-2 border border-[#E5E0F5] bg-white text-sm font-bold text-gray-600 px-4 py-2 rounded-xl hover:bg-gray-50 transition-colors self-start">
           📄 Export PDF
         </button>
       </div>

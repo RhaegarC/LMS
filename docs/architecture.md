@@ -116,6 +116,16 @@ Limits: **500 MB max**, allowlist `JPG/PNG/MP4/MOV/WEBM/MP3/M4A`. No chunked-res
 
 - **Single React app** — three lazy-loaded route sections (`/teacher`, `/student`, `/admin`)
   using React Router, guarded by route guards resolving the app role from the current user (DB-backed).
+- **Responsive, adaptive layout** — one codebase serving **PC, tablet, and phone** (no separate mobile build;
+  product targets in [PRD §9.5](docs/PRD.md)):
+  - `md` (≥ 768 px) and up: fixed **sidebar** navigation on the left (logo, role menu, profile).
+  - Below `md`: a top bar with a **☰ hamburger** (slides the sidebar in as an overlay drawer) plus a
+    **bottom tab bar** carrying the primary navigation with an active-tab indicator.
+  - `sm` (≥ 640 px): data lists keep a column-header row; below `sm` they collapse into **stacked cards**.
+  - `lg` (≥ 1024 px): dashboards expand to multi-pane layouts (stat cards 2 → 4 across, 3/2 content split).
+  - Very wide tables (e.g. per-student reports) scroll horizontally **inside their card** (`overflow-x-auto`);
+    the page itself never scrolls sideways.
+  - Fonts, spacing, and touch targets scale for each size (≥ 44 px targets on touch devices).
 - **No global state library** — hooks + context.
 - **UI source:** the design is created in **Figma Make**; the exported UI source lives in `web/`.
 - Shared components: star picker, review player, confetti, media recorder, quick-comment picker.
