@@ -2,21 +2,21 @@
 
 ## Welcome 👋
 
-LMS is your English-teaching companion. It manages the whole homework journey in one place:
+LMS is your English-teaching companion. Capture every class day — a short note, photos, and videos — then set the homework that goes with it, all in one place.
 
-**📝 You assign → 📤 Students respond → ⭐ You give feedback → 📊 You see the results**
+**📝 You capture the day → 📤 Students respond → ⭐ You give feedback → 📊 You see the results**
 
-No more paper, no more files scattered in chat, no more guessing who handed things in on time.
+No more paper, no more files scattered in chat, no more guessing who did the work.
 
 ---
 
 ## How it works
 
 1. **Create a class** and add your students.
-2. **Create an assignment** — with text, video, or voice instructions.
-3. **Students submit** their own text, video, or voice responses.
-4. **You review and grade** — stars, comments, even your own voice message.
-5. **Publish feedback** — your students see it instantly.
+2. **Recap a class day** — pick the class and date; add a note, photos, and videos.
+3. **Set homework (optional)** — text, image, or video tasks for the same day, each with an optional text or voice explanation.
+4. **Students respond** — they see the recap and complete the homework.
+5. **Review & publish** — stars, comments, even your own voice message.
 
 ---
 
@@ -25,7 +25,7 @@ No more paper, no more files scattered in chat, no more guessing who handed thin
 | What you can do | Notes |
 | :--- | :--- |
 | **Create a class** | Give it a name and a short description |
-| **Edit a class** | Change name / description anytime — students & assignments are untouched |
+| **Edit a class** | Change name / description anytime — students and their work are untouched |
 | **Add students** | Search by name or email, add one or many |
 | **Remove students** | The student loses access right away — but their past submissions are kept for your records |
 
@@ -33,29 +33,32 @@ Students can be in several of your classes at once. Duplicate enrollments are si
 
 ---
 
-## 2. Assignments
+## 2. Class Summary
 
-Build an assignment from three kinds of instruction items:
+Choose the class and the date, recap the day, and set optional homework for it — all on one page.
 
-| Item type | What it is |
+### Recap the day
+
+| Part | What it is |
 | :--- | :--- |
-| **Text** 📝 | Rich text — bold, lists, full instructions |
-| **Video** 🎬 | A reference video for students to watch and mimic |
-| **Voice** 🎤 | A short audio instruction you record |
+| **Text note** ✍️ | Write what you covered and how the class went — shared with the class |
+| **Photo library** 📸 | Upload several photos from the lesson — a gallery the class can look back on |
+| **Video library** 🎬 | Add videos of the class; students can watch them any time |
 
-**Key features:**
+### Homework — optional, same day
 
-- **Due date** for each assignment (11:59 PM your time).
-- **Draft mode** — save quietly, work on it later, nothing is visible to students until you **publish**.
-- **Clone** — duplicate a past assignment and reuse it with just a few tweaks.
-- **Edit after publishing** — tweak anything; students see the new version next time they look.
-- Assign to **one class or several**.
+- **No title, no re-picking classes** — the class and date are already chosen.
+- **Text, image, or video tasks** — a written question, a picture to look at, or a clip to watch.
+- **Optional explanation per task** — a note 📝 or a voice recording 🎙️ to help kids know what to do.
+- **Its own due date** — defaulted to a week after class, editable anytime.
+- **Draft → publish** — save quietly, or add homework later to a live summary.
+- **Edit after publishing** — students see the new version next time they look.
 
 ---
 
 ## 3. Student submissions
 
-- Students respond to **every item** — text, video, or voice.
+- Students answer **every homework task** — a written question, a picture, or a video — by typing or recording their voice.
 - **Late work is accepted** and clearly marked with a ⏰ **Late** badge — no penalty, just a heads-up for you.
 - Students can **edit their submission** until you've published feedback.
   - If a student resubmits after you started grading, your **draft feedback is cleared** and you're notified to grade again. No surprises.
@@ -68,7 +71,7 @@ Build an assignment from three kinds of instruction items:
 Every submission awaiting your feedback, **oldest first**. You only see your own classes.
 
 ### The review player
-Watch videos and listen to voice responses right in the page — with **playback speed** (0.5x → 2x) so long recordings don't eat your time.
+Read typed answers and listen to voice recordings right in the page — with **playback speed** (0.5x → 2x) so long recordings don't eat your time.
 
 ### Your feedback toolkit
 
@@ -94,17 +97,17 @@ Save feedback as a **draft** (invisible to students) and finish later. When you 
 
 ## 5. Reports & statistics 📊
 
-### Assignment statistics
-For any assignment, see at a glance:
+### Homework statistics
+For any homework, see at a glance:
 
 - **Total submissions** — who handed in, who didn't
 - **On-time vs Late** vs Not-submitted (counts + percentages)
-- **Per-item average stars** — spot which item students found hardest
+- **Per-item average stars** — spot which task students found hardest
 
 ### Student progress card
-A complete view of **one student** across assignments:
+A complete view of **one student** across their homework:
 
-- Every assignment + submission date (Late badge included)
+- Every homework + submission date (Late badge included)
 - Per-item star ratings
 - Feedback summary
 - A **trend** — improving 📈, steady ➡️, or declining 📉
@@ -112,7 +115,7 @@ A complete view of **one student** across assignments:
 - **Export as PDF** — perfect for parent–teacher meetings
 
 ### Class engagement snapshot
-A class-level overview for a specific assignment:
+A class-level overview for a specific homework:
 
 - ✅ On-time / ⏰ Late / ❌ Not-submitted breakdown
 - **Per-item star distribution** — e.g. 5⭐ (6), 4⭐ (8), 3⭐ (2)
@@ -123,11 +126,11 @@ A class-level overview for a specific assignment:
 
 ## What students see on their side
 
-- Their assignments with clear instructions
-- Text / video / voice recording to respond
-- A **confetti celebration 🎉** when they submit successfully
-- Their feedback once you publish: star ratings, comments, and your voice message
-- Their own progress card, tracking how they're doing over time
+- **The day's recap** — photos, videos, and a note from each class, right where their homework lives
+- **Their homework** — clear tasks (text, image, or video), each with an optional explanation
+- A **confetti celebration 🎉** when homework goes through successfully
+- **Their feedback** once you grade: star ratings, comments, and your voice message
+- Their own **progress card**, tracking how they're doing over time
 
 ---
 
@@ -149,9 +152,9 @@ One responsive LMS — no installs, just a browser. The same screens adapt to wh
 
 1. Visit https://engcraft.nioh.uk for a static UI demo without data.
 2. Create your class → add students
-3. Write your first assignment (drafts are your friend) → publish
-4. Wait for submissions → review from the pending queue
-5. Grade with stars + comments + voice → publish feedback
+3. Open a new **Class Summary** → pick the class and the date
+4. Recap the day (note, photos, videos) → add homework if you like → publish
+5. Grade homework with stars + comments + voice → publish feedback
 6. Open the reports to see how your class is doing
 
 Simple, encouraging, and built around your workflow. Welcome aboard! 🚀
