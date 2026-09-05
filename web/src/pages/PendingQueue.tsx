@@ -38,10 +38,10 @@ export default function PendingQueue({ onNavigate }: Props) {
   return (
     <div className="p-4 sm:p-8 max-w-5xl mx-auto">
       {/* Header */}
-      <div className="mb-8">
-        <h1 className="text-3xl font-black text-[#1A1033]" style={{ fontFamily: "Nunito, sans-serif" }}>Pending Queue</h1>
+      <div className="mb-6">
+        <h1 className="text-2xl sm:text-3xl font-black text-[#1A1033]" style={{ fontFamily: "Nunito, sans-serif" }}>Pending Queue</h1>
         <p className="text-gray-500 text-sm mt-1">
-          {filtered.length} submission{filtered.length !== 1 ? "s" : ""} waiting for feedback · Sorted by oldest first
+          {filtered.length} homework submission{filtered.length !== 1 ? "s" : ""} waiting for feedback · Sorted by oldest first
         </p>
       </div>
 

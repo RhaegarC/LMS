@@ -56,10 +56,44 @@ export default function ReviewSubmission({ onNavigate }: Props) {
   const [published, setPublished] = useState(false);
   const [speed, setSpeed] = useState(1);
 
-  const items = [
-    { type: "voice", label: "Introduce your family", response: "voice-response.mp3", duration: "0:45" },
-    { type: "text", label: "Write three sentences about your family", response: "My name is Emma. I have a mom, a dad, and a little brother. My brother's name is Leo." },
-    { type: "video", label: "Show a photo of your family and describe each person", response: "family-video.mp4", duration: "1:12" },
+  type ContentType = "text" | "image" | "video";
+  type ExplainType = "text" | "voice";
+
+  interface ReviewItem {
+    contentType: ContentType;
+    content: string;
+    explanation?: { type: ExplainType; content: string };
+    studentResponseType: "text" | "voice";
+    studentResponse: string;
+    duration?: string;
+  }
+
+  const contentIcon: Record<ContentType, string> = { text: "📝", image: "🖼️", video: "🎬" };
+  const contentLabel: Record<ContentType, string> = { text: "Text", image: "Image", video: "Video" };
+
+  const items: ReviewItem[] = [
+    {
+      contentType: "image",
+      content: "family-photo.jpg",
+      explanation: { type: "voice", content: "voice-explain.mp3" },
+      studentResponseType: "voice",
+      studentResponse: "voice-response.mp3",
+      duration: "0:45",
+    },
+    {
+      contentType: "text",
+      content: "Write three sentences about your family. Tell us who is in your family and what they like to do!",
+      explanation: { type: "text", content: "Use words like: mother, father, brother, sister, grandma, grandpa." },
+      studentResponseType: "text",
+      studentResponse: "My name is Emma. I have a mom, a dad, and a little brother. My brother's name is Leo. My mom likes cooking and my dad likes football.",
+    },
+    {
+      contentType: "video",
+      content: "family-intro-example.mp4",
+      studentResponseType: "voice",
+      studentResponse: "student-video.mp4",
+      duration: "1:12",
+    },
   ];
 
   const addQuickComment = (text: string, emoji: string) => {
@@ -107,40 +141,89 @@ export default function ReviewSubmission({ onNavigate }: Props) {
         <div className="lg:col-span-3 space-y-4">
           <div className="bg-[#F0EBFF] rounded-2xl px-4 py-3">
             <div className="font-black text-[#6C47FF] text-sm" style={{ fontFamily: "Nunito, sans-serif" }}>
-              My Family Introduction
+              Homework · Sep 5, 2026
             </div>
-            <div className="text-xs text-purple-400">Assignment · Level 1 – Blue</div>
+            <div className="text-xs text-purple-400">Class Summary · Level 1 – Blue</div>
           </div>
 
           {items.map((item, i) => (
             <div key={i} className="bg-white rounded-2xl border border-[#E5E0F5] overflow-hidden">
-              <div className="px-5 py-3.5 border-b border-[#F0EBFF] flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <span className="w-6 h-6 rounded-lg bg-[#F0EBFF] text-[#6C47FF] flex items-center justify-center text-xs font-black">{i + 1}</span>
-                  <span className="text-sm font-bold text-[#1A1033]">{item.label}</span>
-                </div>
-                <span className="text-xs text-gray-400">
-                  {item.type === "text" ? "📝 Text" : item.type === "video" ? "🎥 Video" : "🎙️ Voice"}
+              {/* Item header */}
+              <div className="px-5 py-3 border-b border-[#F0EBFF] bg-[#FAFAF5] flex items-center gap-2">
+                <span className="w-6 h-6 rounded-lg bg-[#F0EBFF] text-[#6C47FF] flex items-center justify-center text-xs font-black flex-none">{i + 1}</span>
+                <span className="text-xs font-black bg-[#F0EBFF] text-[#6C47FF] px-2 py-0.5 rounded-full">
+                  {contentIcon[item.contentType]} {contentLabel[item.contentType]}
                 </span>
+                {item.explanation && (
+                  <span className="text-xs font-semibold text-amber-600 bg-amber-50 px-2 py-0.5 rounded-full">
+                    {item.explanation.type === "voice" ? "🎙️" : "📝"} Explanation
+                  </span>
+                )}
               </div>
 
-              <div className="p-5">
-                {item.type === "text" ? (
-                  <p className="text-sm text-gray-700 leading-relaxed">{item.response}</p>
-                ) : (
-                  <div className="space-y-3">
-                    {/* Fake player */}
+              <div className="p-5 space-y-4">
+                {/* ── Item content ── */}
+                <div>
+                  <div className="text-[10px] font-black text-gray-400 uppercase tracking-wide mb-1.5">Item content</div>
+                  {item.contentType === "text" && (
+                    <div className="bg-[#F0EBFF] rounded-xl px-4 py-3 text-sm text-[#1A1033] leading-relaxed">
+                      {item.content}
+                    </div>
+                  )}
+                  {item.contentType === "image" && (
+                    <div className="bg-gradient-to-br from-pink-100 to-amber-100 rounded-xl h-32 flex flex-col items-center justify-center gap-1 border border-pink-200">
+                      <span className="text-4xl">🖼️</span>
+                      <span className="text-xs text-gray-400">{item.content}</span>
+                    </div>
+                  )}
+                  {item.contentType === "video" && (
+                    <div className="bg-[#F4F2F0] rounded-xl p-3 flex items-center gap-3">
+                      <button className="w-8 h-8 rounded-full bg-[#6C47FF] text-white flex items-center justify-center text-xs hover:bg-[#5535e0] transition-colors flex-none">▶</button>
+                      <div className="flex-1">
+                        <div className="h-1.5 bg-gray-200 rounded-full"><div className="h-full w-0 bg-[#6C47FF] rounded-full" /></div>
+                        <div className="text-xs text-gray-400 mt-1">{item.content}</div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* ── Explanation ── */}
+                {item.explanation && (
+                  <div className="border border-amber-200 rounded-xl overflow-hidden">
+                    <div className="px-3 py-1.5 bg-amber-50">
+                      <span className="text-[10px] font-black text-amber-700 uppercase tracking-wide">
+                        {item.explanation.type === "voice" ? "🎙️ Voice explanation" : "📝 Text explanation"}
+                      </span>
+                    </div>
+                    {item.explanation.type === "text" ? (
+                      <div className="px-4 py-2.5 text-xs text-gray-600 leading-relaxed">{item.explanation.content}</div>
+                    ) : (
+                      <div className="px-4 py-2.5 flex items-center gap-3">
+                        <button className="w-7 h-7 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center text-xs hover:bg-amber-200 transition-colors flex-none">▶</button>
+                        <div className="flex-1 h-1.5 bg-amber-100 rounded-full"><div className="h-full w-0 bg-amber-400 rounded-full" /></div>
+                        <span className="text-xs font-mono text-amber-600 flex-none">0:18</span>
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {/* ── Student response ── */}
+                <div>
+                  <div className="text-[10px] font-black text-gray-400 uppercase tracking-wide mb-1.5">Student's response</div>
+                  {item.studentResponseType === "text" ? (
+                    <p className="text-sm text-gray-700 leading-relaxed bg-gray-50 rounded-xl px-4 py-3 border border-[#F0EBFF]">
+                      {item.studentResponse}
+                    </p>
+                  ) : (
                     <div className="bg-[#F4F2F0] rounded-xl p-4">
-                      <div className="flex items-center gap-3 mb-3">
-                        <button className="w-9 h-9 rounded-full bg-[#6C47FF] text-white flex items-center justify-center text-sm hover:bg-[#5535e0] transition-colors">
-                          ▶
-                        </button>
+                      <div className="flex items-center gap-3 mb-2">
+                        <button className="w-9 h-9 rounded-full bg-[#6C47FF] text-white flex items-center justify-center text-sm hover:bg-[#5535e0] transition-colors flex-none">▶</button>
                         <div className="flex-1">
                           <div className="h-1.5 bg-gray-200 rounded-full">
                             <div className="h-full w-1/3 bg-[#6C47FF] rounded-full" />
                           </div>
                         </div>
-                        <span className="text-xs font-mono text-gray-500">{item.duration}</span>
+                        <span className="text-xs font-mono text-gray-500 flex-none">{item.duration}</span>
                       </div>
                       <div className="flex items-center gap-2">
                         <span className="text-xs text-gray-400">Speed:</span>
@@ -157,11 +240,11 @@ export default function ReviewSubmission({ onNavigate }: Props) {
                         ))}
                       </div>
                     </div>
-                  </div>
-                )}
+                  )}
+                </div>
 
                 {/* Per-item rating */}
-                <div className="mt-4 pt-4 border-t border-[#F0EBFF]">
+                <div className="pt-1 border-t border-[#F0EBFF]">
                   <div className="flex items-center justify-between">
                     <span className="text-xs font-semibold text-gray-400">Item Rating</span>
                     <StarRating value={ratings[i]} onChange={(v) => setRatings((prev) => prev.map((r, ri) => ri === i ? v : r))} />
@@ -179,7 +262,7 @@ export default function ReviewSubmission({ onNavigate }: Props) {
             <h3 className="font-black text-[#1A1033] mb-3" style={{ fontFamily: "Nunito, sans-serif" }}>Ratings Summary</h3>
             {items.map((item, i) => (
               <div key={i} className="flex items-center justify-between py-1.5">
-                <span className="text-xs text-gray-500 truncate flex-1 mr-2">Item {i + 1}: {item.label.slice(0, 20)}…</span>
+                <span className="text-xs text-gray-500 truncate flex-1 mr-2">Item {i + 1}: {contentLabel[item.contentType]}</span>
                 <span className="text-xs font-black text-[#FFD147]">{ratings[i] > 0 ? `${ratings[i].toFixed(1)}⭐` : "–"}</span>
               </div>
             ))}

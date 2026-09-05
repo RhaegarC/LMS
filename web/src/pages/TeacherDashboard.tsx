@@ -75,7 +75,7 @@ export default function TeacherDashboard({ onNavigate }: Props) {
           onClick={() => onNavigate("create-assignment")}
           className="flex items-center gap-2 bg-[#6C47FF] hover:bg-[#5535e0] text-white font-bold px-4 py-2.5 rounded-xl transition-colors shadow-lg shadow-purple-200 self-start sm:self-auto"
         >
-          <span>+</span> New Assignment
+          <span>+</span> New Class Summary
         </button>
       </div>
 
@@ -83,7 +83,7 @@ export default function TeacherDashboard({ onNavigate }: Props) {
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-6">
         <StatCard value="7" label="Pending Review" color="bg-[#FF6B47] text-white" icon="⏳" sub="Oldest: 2 days ago" />
         <StatCard value="3" label="Active Classes" color="bg-[#FFD147] text-[#1A1033]" icon="🏫" sub="42 students total" />
-        <StatCard value="12" label="Assignments" color="bg-[#47D6B5] text-white" icon="📋" sub="2 drafts" />
+        <StatCard value="12" label="Summaries" color="bg-[#47D6B5] text-white" icon="📋" sub="2 drafts" />
         <StatCard value="94%" label="On-Time Rate" color="bg-[#6C47FF] text-white" icon="✅" sub="This month" />
       </div>
 
@@ -106,10 +106,10 @@ export default function TeacherDashboard({ onNavigate }: Props) {
           </div>
         </div>
 
-        {/* Recent assignments */}
+        {/* Recent class summaries */}
         <div className="lg:col-span-2 bg-white rounded-2xl border border-[#E5E0F5] overflow-hidden">
           <div className="px-5 py-4 border-b border-[#E5E0F5] flex items-center justify-between">
-            <h2 className="font-black text-[#1A1033]" style={{ fontFamily: "Nunito, sans-serif" }}>Assignments</h2>
+            <h2 className="font-black text-[#1A1033]" style={{ fontFamily: "Nunito, sans-serif" }}>Class Summaries</h2>
             <button onClick={() => onNavigate("assignments")} className="text-xs font-bold text-[#6C47FF] hover:underline">
               All →
             </button>
@@ -118,7 +118,10 @@ export default function TeacherDashboard({ onNavigate }: Props) {
             {recentAssignments.map((a, i) => (
               <div key={i} className="px-5 py-3.5 hover:bg-purple-50/40 transition-colors">
                 <div className="flex items-start justify-between gap-2 mb-1">
-                  <span className="font-semibold text-sm text-[#1A1033] truncate">{a.title}</span>
+                  <div>
+                    <span className="font-semibold text-sm text-[#1A1033]">{a.title}</span>
+                    <div className="text-xs text-gray-400 mt-0.5">{a.classes}</div>
+                  </div>
                   <span className={`text-xs font-bold px-2 py-0.5 rounded-full flex-none ${
                     a.status === "draft"
                       ? "bg-gray-100 text-gray-500"
@@ -127,11 +130,10 @@ export default function TeacherDashboard({ onNavigate }: Props) {
                     {a.status === "draft" ? "Draft" : "Live"}
                   </span>
                 </div>
-                <div className="text-xs text-gray-400">{a.classes}</div>
                 <div className="flex items-center justify-between mt-1.5">
-                  <span className="text-xs text-gray-400">Due {a.due}</span>
+                  <span className="text-xs text-gray-400">HW due {a.due}</span>
                   {a.submissions > 0 && (
-                    <span className="text-xs font-semibold text-[#6C47FF]">{a.submissions} submissions</span>
+                    <span className="text-xs font-semibold text-[#6C47FF]">{a.submissions} submitted</span>
                   )}
                 </div>
               </div>
@@ -142,7 +144,7 @@ export default function TeacherDashboard({ onNavigate }: Props) {
               onClick={() => onNavigate("create-assignment")}
               className="w-full border-2 border-dashed border-[#E5E0F5] rounded-xl py-2.5 text-sm font-bold text-gray-400 hover:border-[#6C47FF] hover:text-[#6C47FF] transition-colors"
             >
-              + Create assignment
+              + New class summary
             </button>
           </div>
         </div>

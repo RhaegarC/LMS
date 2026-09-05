@@ -32,13 +32,13 @@ export default function ViewFeedback({ onNavigate }: Props) {
         <button onClick={() => onNavigate("student-dashboard")} className="text-gray-400 hover:text-[#1A1033] transition-colors">← Back</button>
       </div>
 
-      {/* Assignment info */}
-      <div className="mb-8">
+      {/* Homework info */}
+      <div className="mb-6">
         <div className="text-sm font-semibold text-[#47D6B5] mb-1">Feedback Received 🌟</div>
-        <h1 className="text-3xl font-black text-[#1A1033]" style={{ fontFamily: "Nunito, sans-serif" }}>
-          Numbers 1–10 Reading
+        <h1 className="text-2xl sm:text-3xl font-black text-[#1A1033]" style={{ fontFamily: "Nunito, sans-serif" }}>
+          Homework · Numbers 1–10 Reading
         </h1>
-        <div className="text-sm text-gray-400 mt-1">Level 1 – Blue · Published Aug 22, 2026</div>
+        <div className="text-sm text-gray-400 mt-1">Class Summary · Level 1 – Blue · Aug 20, 2026</div>
       </div>
 
       {/* Overall score hero */}

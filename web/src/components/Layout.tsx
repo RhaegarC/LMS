@@ -25,7 +25,7 @@ interface LayoutProps {
 
 const teacherNav = [
   { id: "teacher-dashboard" as Page, label: "Dashboard", icon: "⊞" },
-  { id: "assignments" as Page, label: "Assignments", icon: "📋" },
+  { id: "assignments" as Page, label: "Summaries", icon: "📋" },
   { id: "pending-queue" as Page, label: "Pending", icon: "⏳" },
   { id: "class-management" as Page, label: "Classes", icon: "🏫" },
   { id: "progress-report" as Page, label: "Reports", icon: "📊" },
