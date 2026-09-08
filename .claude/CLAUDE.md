@@ -14,6 +14,7 @@ Product spec: [docs/PRD.md](docs/PRD.md) · Aligned architecture: [docs/architec
 - **Feature backlog:** [docs/features/](docs/features/) — features `00-*` … `15-*`
 - **Bug tracker:** [docs/bugs/00-bug-log.md](docs/bugs/00-bug-log.md) — bugs are tracked via the Bug Fix Workflow below (not part of the feature scan)
 - **TDD strategy & test tiers:** [docs/testing-and-tdd.md](docs/testing-and-tdd.md)
+- **Web app (React):** [web/AGENTS.md](web/AGENTS.md) — Figma Make export; project structure & conventions
 
 ## Development Workflow — TDD with Scrum
 
@@ -43,7 +44,7 @@ Features are numbered by priority/order, matching the files in `docs/features/`:
 ### TDD Workflow (Strictly Follow)
 
 #### Phase 0: Foundation (once, before feature 01)
-1. Scaffold the solution + test projects per [docs/testing-and-tdd.md](docs/testing-and-tdd.md): backend `api/Lms.Api` + `api/Lms.Tests` (xUnit); frontend Angular app in `web/` with Vitest configured.
+1. Scaffold the solution + test projects per [docs/testing-and-tdd.md](docs/testing-and-tdd.md): backend `api/Lms.Api` + `api/Lms.Tests` (xUnit); frontend React app in `web/` (UI source exported from Figma Make) with Vitest configured.
 2. Confirm `dotnet test` (from `api/`) runs green on an empty test project.
 
 #### Phase 1: Feature Selection

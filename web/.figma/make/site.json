@@ -1,0 +1,10 @@
+{
+  "description": "Enables users to design and build intuitive UI pages quickly, enhancing web app development with streamlined visual tools for better user experiences.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}

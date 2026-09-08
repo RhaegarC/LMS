@@ -22,7 +22,7 @@ No production code without a failing test first (exceptions: scaffolding, config
 |---|---|---|---|
 | **Unit** | xUnit | Domain/business rules: permission-matrix resolution, late-flag logic, feedback publish rules, draft-clearing on resubmit, item ordering | `api/Lms.Tests/` unit project |
 | **Integration** | xUnit + EF Core InMemory (or SQLite) | Persistence: `Submission` round-trips, owner-scoped vs admin-scoped queries, enrollment rules, media-record wiring | `api/Lms.Tests/`, real `DbContext` |
-| **Component** | Vitest + Testing Library | Angular components: star picker, review player, confetti, media recorder, quick-comment picker; route guards; services | `web/` test setup (Vitest) |
+| **Component** | Vitest + React Testing Library | React components: star picker, review player, confetti, media recorder, quick-comment picker; route guards; hooks/context | `web/` test setup (Vitest) |
 | **Manual E2E** | — | Deployed SWA + ACA app: sign-in → teacher creates class/assignment → student submits (incl. media) → teacher grades → feedback visible | run against the cloud URL |
 
 **Auth testing note:** Entra ID sign-in can't run in unit/component tests. Mock the authentication

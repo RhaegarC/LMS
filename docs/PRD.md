@@ -683,6 +683,24 @@ Distribution: 5⭐ (4), 4⭐ (6), 3⭐ (4), 2⭐ (2), 1⭐ (0)
 | Database | Serverless tier (auto-pause during idle) |
 | Storage | Unlimited blob storage (pay-as-you-go) |
 
+### 9.5 Responsive Design & Device Support
+
+Browser-only — one responsive web app that adapts to the user's screen. No native apps in V1; the same UI serves **PC / laptop, tablet, and phone**.
+
+| Device | Reference width | Experience |
+| :--- | :--- | :--- |
+| **PC / laptop** | ≥ 1024 px | Fixed sidebar navigation; multi-column dashboards & reports; full data tables |
+| **Tablet** | 640 – 1023 px | Sidebar is used from 768 px up; below that a ☰ drawer + bottom navigation. Content runs single-main-pane layouts |
+| **Phone** | < 640 px | ☰ menu and bottom tab bar; tables reflow to stacked cards; thumb-friendly touch targets |
+
+Reference widths are product-level targets — the exact breakpoints are tuned per component in the implementation (mobile-first `sm`/`md`/`lg` scale; see [architecture §7](docs/architecture.md)).
+
+**Acceptance Criteria:**
+- The page never scrolls horizontally on any supported screen; very wide tables may scroll within their own card.
+- Primary navigation is reachable at every size: sidebar on wide screens, ☰ drawer + bottom tab bar on narrow ones.
+- Tap targets are ≥ 44 px on touch devices.
+- Data-dense pages (pending queue, reports) keep every required column readable at phone width (via reflow or contained scroll).
+
 ---
 
 ## 10. Exclusions (V1.0 Out of Scope)
@@ -741,6 +759,7 @@ The following features are **deliberately excluded** from V1.0 to maintain simpl
 | Version | Date | Author | Changes |
 | :--- | :--- | :--- | :--- |
 | 1.0 | 2026-08-27 | System Architect | Initial release – complete V1.0 specification |
+| 1.1 | 2026-09-04 | System Architect | Add responsive design & device-support targets for PC/tablet/phone (§9.5) |
 
 ---
 
